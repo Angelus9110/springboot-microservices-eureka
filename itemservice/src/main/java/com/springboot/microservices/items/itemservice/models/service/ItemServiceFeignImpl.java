@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Service("serviceFeign")
-//@Primary
+@Service("serviceFeign")
+@Primary
 public class ItemServiceFeignImpl implements ItemService{
 
     @Autowired
@@ -18,11 +18,11 @@ public class ItemServiceFeignImpl implements ItemService{
 
     @Override
     public List<Item> findAll() {
-        return null;//clientProductRest.list().stream().map(product -> new Item(product, 1)).collect(Collectors.toList());
+        return clientProductRest.list().stream().map(product -> new Item(product, 1)).collect(Collectors.toList());
     }
 
     @Override
     public Item findById(Long id, Integer quantity) {
-        return null;//new Item(clientProductRest.product(id), quantity);
+        return new Item(clientProductRest.product(id), quantity);
     }
 }
