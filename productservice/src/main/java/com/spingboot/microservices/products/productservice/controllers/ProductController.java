@@ -29,9 +29,14 @@ public class ProductController{
 	}
 	
 	@GetMapping("/list/{id}")
-	public Product product(@PathVariable Long id) {
+	public Product product(@PathVariable Long id) throws Exception {
 		Product product = productService.findById(id);
 		product.setPort(port);
+		/*try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e){
+			e.printStackTrace();
+		}*/
 		return productService.findById(id);
 	}
 
