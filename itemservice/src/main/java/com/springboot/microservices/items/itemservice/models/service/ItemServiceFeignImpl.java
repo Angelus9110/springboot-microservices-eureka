@@ -5,9 +5,14 @@ import com.springboot.microservices.items.itemservice.models.Item;
 import com.springboot.microservices.items.itemservice.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service("serviceFeign")
@@ -29,16 +34,16 @@ public class ItemServiceFeignImpl implements ItemService{
 
     @Override
     public Product save(Product product) {
-        return null;
+        return clientProductRest.createProduct(product);
     }
 
     @Override
     public Product update(Product product, Long id) {
-        return null;
+        return clientProductRest.edit(product, id);
     }
 
     @Override
     public void delete(Long id) {
-
+        clientProductRest.delete(id);
     }
 }
