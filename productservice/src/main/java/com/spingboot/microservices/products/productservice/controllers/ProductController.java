@@ -46,5 +46,20 @@ public class ProductController{
 		return productService.save(product);
 	}
 
+	@PutMapping("/edit/{id}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Product edit(@RequestBody Product product, @PathVariable Long id){
+		Product productEntity = productService.findById(id);
+		productEntity.setName(product.getName());
+		productEntity.setPrice(product.getPrice());
+		return productService.save(productEntity);
+	}
+
+	@DeleteMapping("/delete/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Long id){
+		productService.deleteById(id);
+	}
+
 
 }
