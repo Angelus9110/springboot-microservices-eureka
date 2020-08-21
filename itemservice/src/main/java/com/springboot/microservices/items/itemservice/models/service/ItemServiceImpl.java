@@ -50,7 +50,7 @@ public class ItemServiceImpl implements ItemService{
         Map<String, String> pathVariables = new HashMap<>();
         pathVariables.put("id", id.toString());
         HttpEntity<Product> body = new HttpEntity<>(product);
-        ResponseEntity<Product> response = restClient.exchange("http://product-service/update/{id}",
+        ResponseEntity<Product> response = restClient.exchange("http://product-service/edit/{id}",
             HttpMethod.PUT, body, Product.class, pathVariables);
         return response.getBody();
     }
