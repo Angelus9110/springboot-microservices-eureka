@@ -1,6 +1,6 @@
 package com.spingboot.microservices.products.productservice.models.service;
 
-import com.spingboot.microservices.products.productservice.models.entity.Product;
+import com.springboot.microservices.commons.commonservice.models.entity.Product;
 
 import java.util.List;
 

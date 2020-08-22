@@ -1,8 +1,7 @@
 package com.springboot.microservices.items.itemservice.clients;
 
-import com.springboot.microservices.items.itemservice.models.Product;
+import com.springboot.microservices.commons.commonservice.models.entity.Product;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

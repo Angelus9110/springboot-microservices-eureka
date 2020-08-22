@@ -2,7 +2,7 @@ package com.spingboot.microservices.products.productservice.models.service;
 
 import java.util.List;
 
-import com.spingboot.microservices.products.productservice.models.entity.Product;
+import com.springboot.microservices.commons.commonservice.models.entity.Product;
 import com.spingboot.microservices.products.productservice.models.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

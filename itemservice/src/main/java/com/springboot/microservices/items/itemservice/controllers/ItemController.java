@@ -1,8 +1,8 @@
 package com.springboot.microservices.items.itemservice.controllers;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.springboot.microservices.commons.commonservice.models.entity.Product;
 import com.springboot.microservices.items.itemservice.models.Item;
-import com.springboot.microservices.items.itemservice.models.Product;
 import com.springboot.microservices.items.itemservice.models.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

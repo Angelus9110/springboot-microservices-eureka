@@ -1,6 +1,7 @@
 package com.springboot.microservices.items.itemservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboot.microservices.commons.commonservice.models.entity.Product;
 
 public class Item {
 

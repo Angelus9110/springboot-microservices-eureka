@@ -3,7 +3,7 @@ package com.spingboot.microservices.products.productservice.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.spingboot.microservices.products.productservice.models.entity.Product;
+import com.springboot.microservices.commons.commonservice.models.entity.Product;
 import com.spingboot.microservices.products.productservice.models.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

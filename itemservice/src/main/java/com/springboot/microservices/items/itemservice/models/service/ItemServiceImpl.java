@@ -1,9 +1,8 @@
 package com.springboot.microservices.items.itemservice.models.service;
 
+import com.springboot.microservices.commons.commonservice.models.entity.Product;
 import com.springboot.microservices.items.itemservice.models.Item;
-import com.springboot.microservices.items.itemservice.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
