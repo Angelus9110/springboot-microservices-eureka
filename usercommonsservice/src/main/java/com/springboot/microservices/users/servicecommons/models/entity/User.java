@@ -31,6 +31,8 @@ public class User implements Serializable {
         uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})})
     private List<Role> roles;
 
+    private Integer loginTryNumber;
+
     public Long getId() {
         return id;
     }
@@ -93,5 +95,13 @@ public class User implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Integer getLoginTryNumber() {
+        return loginTryNumber;
+    }
+
+    public void setLoginTryNumber(Integer loginTryNumber) {
+        this.loginTryNumber = loginTryNumber;
     }
 }
