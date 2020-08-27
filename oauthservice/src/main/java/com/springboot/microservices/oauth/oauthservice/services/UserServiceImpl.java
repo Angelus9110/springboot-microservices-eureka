@@ -1,5 +1,6 @@
 package com.springboot.microservices.oauth.oauthservice.services;
 
+import brave.Tracer;
 import com.springboot.microservices.oauth.oauthservice.clients.UserFeignClient;
 import com.springboot.microservices.users.servicecommons.models.entity.User;
 import feign.FeignException;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserFeignClient userFeignClient;
 
+    @Autowired
+    private Tracer tracer;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -40,7 +44,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 user.getPassword(), user.getEnabled(), true, true, true,
                 authorities);
         } catch (FeignException e) {
-            logger.error("Login error, the user " + username + " doesn't exist in the system");
+            String message = "Login error, the user " + username + " doesn't exist in the system";
+            logger.error(message);
+            tracer.currentSpan().tag("message.error", message + " : " + e.getMessage());
             throw new UsernameNotFoundException("Login error, the user " + username + " doesn't exist in the system");
         }
     }
