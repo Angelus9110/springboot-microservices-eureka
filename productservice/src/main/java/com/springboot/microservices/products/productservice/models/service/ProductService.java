@@ -1,4 +1,4 @@
-package com.spingboot.microservices.products.productservice.models.service;
+package com.springboot.microservices.products.productservice.models.service;
 
 import com.springboot.microservices.commons.commonservice.models.entity.Product;
 

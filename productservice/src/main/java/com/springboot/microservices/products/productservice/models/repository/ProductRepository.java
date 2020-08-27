@@ -1,4 +1,4 @@
-package com.spingboot.microservices.products.productservice.models.repository;
+package com.springboot.microservices.products.productservice.models.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
