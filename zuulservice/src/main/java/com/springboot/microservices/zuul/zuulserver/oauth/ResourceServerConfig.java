@@ -40,32 +40,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         .antMatchers(HttpMethod.GET, "api/products/list/{id}", "/api/items/list/{id}/quantity/{quantity}",
             "/api/users/users/{id}").hasAnyRole("ADMIN", "USER")
         .antMatchers("/api/products/**", "/api/items/**", "api/users/**").hasRole("ADMIN")
-        .anyRequest().authenticated()
-        .and().cors().configurationSource(corsConfigurationSource());
+        .anyRequest().authenticated();
 /*        .antMatchers(HttpMethod.POST, "/api/products/create", "/api/items/create", "api/users/users").hasRole("ADMIN")
         .antMatchers(HttpMethod.PUT, "/api/products/edit/{id}", "/api/items/edit/{id}", "api/users/users/{id}").hasRole("ADMIN")
         .antMatchers(HttpMethod.DELETE, "/api/products/delete/{id}", "/api/items/delete/{id}", "api/users/users/{id}").hasRole("ADMIN");*/
-    }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
-        corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration);
-
-        return source;
-    }
-
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter(){
-        FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean = new FilterRegistrationBean<>(new CorsFilter());
-        corsFilterFilterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return corsFilterFilterRegistrationBean;
     }
 
     @Bean

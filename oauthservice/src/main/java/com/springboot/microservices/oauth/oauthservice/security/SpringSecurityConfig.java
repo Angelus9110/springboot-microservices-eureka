@@ -1,7 +1,7 @@
 package com.springboot.microservices.oauth.oauthservice.security;
 
-import com.springboot.microservices.users.servicecommons.models.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    @Qualifier("UserService")
     @Autowired
     private UserDetailsService userService;
 
@@ -28,8 +30,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.userService).passwordEncoder(passwordEncoder())
-        .and().authenticationEventPublisher(authenticationEventPublisher);
+        auth.userDetailsService(this.userService).passwordEncoder(passwordEncoder());
+        /*.and().authenticationEventPublisher(authenticationEventPublisher)*/
     }
 
     @Override
