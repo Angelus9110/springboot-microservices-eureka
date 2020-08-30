@@ -1,0 +1,129 @@
+version: '3.7'
+services:
+  config-server:
+    image: config-server:v1
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - springcloud
+  service-eureka-server:
+    image: service-eureka-server:v1
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - springcloud
+  springcloud-mysql8:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - springcloud
+    environment:
+      MYSQL_DATABASE: db_springboot_cloud
+      MYSQL_ROOT_PASSWORD: sasa
+  product-service:
+    image: product-service:v1
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - service-eureka-server
+      - springcloud-mysql8
+  item-service:
+    image: item-service:v1
+    ports:
+      - "8082:8082"
+      - "8085:8085"
+      - "8087:8087"
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - service-eureka-server
+      - product-service
+  service-zuul-server:
+    image: service-zuul-server:v1
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - service-eureka-server
+      - product-service
+      - item-service
+      - user-service
+      - oauth-service
+  springcloud-rabbitmq38:
+    image: rabbitmq:3.8-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: always
+    networks:
+      - springcloud
+  zipkin-server:
+    image: zipkin-server:v1
+    ports:
+      - "9411:9411"
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - springcloud-rabbitmq38
+      - springcloud-mysql8
+    environment:
+      RABBIT_ADDRESSES: springcloud-rabbitmq38:5672
+      STORAGE_TYPE: mysql
+      MYSQL_USER: zipkin
+      MYSQL_PASS: zipkin
+      MYSQL_HOST: springcloud-mysql8
+  springcloud-postgres12:
+    image: postgres:12-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - springcloud
+    environment:
+      POSTGRES_DB: db_springboot_cloud
+      POSTGRES_PASSWORD: sasa
+    oauth-service:
+      image: oauth-service:v1
+      ports:
+        - "9100:9100"
+      restart: always
+      networks:
+        - springcloud
+      depends_on:
+        - config-server
+        - service-eureka-server
+        - user-service
+  user-service:
+    image: user-service:v1
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - service-eureka-server
+      - springcloud-postgres12
+  oauth-service:
+    image: servicio-oauth:v1
+    ports:
+      - "9100:9100"
+    restart: always
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - service-eureka-server
+      - user-service
+networks:
+  springcloud:
